@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Screenshots</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            background-color: #f7fafc;
+            color: #2d3748;
+        }
+
+        .navbar {
+            background-color: #fff;
+            padding: 1rem 5%;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-button {
+            color: #2d3748;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
+        }
+
+        .back-button:hover {
+            color: #4299e1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .project-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .status-badge {
+            display: inline-block;
+            background-color: #553c9a;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #2d3748;
+        }
+
+        .description {
+            max-width: 800px;
+            margin: 0 auto;
+            color: #4a5568;
+        }
+
+        .screenshots-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .screenshot-card {
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .screenshot-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .screenshot-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .screenshot-info {
+            padding: 1.5rem;
+        }
+
+        .screenshot-info h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: #2d3748;
+        }
+
+        .screenshot-info p {
+            color: #4a5568;
+            font-size: 0.95rem;
+        }
+
+        /* Modal styles for enlarged images */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            cursor: pointer;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90vh;
+            margin: auto;
+            display: block;
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 1rem auto;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .screenshots-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="../index.html" class="back-button">
+            ← Back to Portfolio
+        </a>
+    </nav>
+
+    <div class="container">
+        <div class="project-header">
+            <span class="status-badge">Work in Progress</span>
+            <h1>Recipe Sharing App</h1>
+            <div class="description">
+                <p>Here are the latest screenshots showing the progress of the project. Each image demonstrates different features and functionalities that have been implemented.</p>
+            </div>
+        </div>
+
+        <div class="screenshots-grid">
+            <!-- Screenshot 1 -->
+            <div class="screenshot-card">
+                <img src="../assets/rc.PNG" alt="Homepage Design" class="screenshot-image">
+                <div class="screenshot-info">
+                    <h3>Homepage Design</h3>
+                    <p>The main landing page featuring the core navigation and hero section.</p>
+                </div>
+            </div>
+
+            <!-- Screenshot 2 -->
+            <div class="screenshot-card">
+                <img src="../assets/sc2.PNG" alt="User Dashboard" class="screenshot-image">
+                <div class="screenshot-info">
+                    <h3>User Dashboard</h3>
+                    <p>Interactive dashboard showing user statistics and activities.</p>
+                </div>
+            </div>
+
+            <!-- Screenshot 3 -->
+            <div class="screenshot-card">
+                <img src="../assets/sc1.PNG" alt="Feature Implementation" class="screenshot-image">
+                <div class="screenshot-info">
+                    <h3>Feature Implementation</h3>
+                    <p>New feature showing the data visualization component.</p>
+                </div>
+            </div>
+
+            <!-- Screenshot 4 -->
+            <div class="screenshot-card">
+                <img src="../assets/sc3.PNG" alt="Mobile View" class="screenshot-image">
+                <div class="screenshot-info">
+                    <h3>Mobile Responsiveness</h3>
+                    <p>Mobile-friendly version of the application interface.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for enlarged images -->
+    <div id="imageModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+
+    <script>
+        // Get the modal
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+        const closeBtn = document.getElementsByClassName('close')[0];
+
+        // Get all images with screenshot-image class
+        const images = document.getElementsByClassName('screenshot-image');
+
+        // Add click event to all images
+        Array.from(images).forEach(img => {
+            img.onclick = function() {
+                modal.style.display = 'block';
+                modalImg.src = this.src;
+            }
+        });
+
+        // Close modal when clicking the x
+        closeBtn.onclick = function() {
+            modal.style.display = 'none';
+        }
+
+        // Close modal when clicking outside the image
+        modal.onclick = function(event) {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
